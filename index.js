@@ -35,8 +35,6 @@ app.get('/', (req, res) => {
 
 app.use('/api/posts', postRoutes);
 
-app.listen(env.PORT);
-
 app.listen(env.PORT, '0.0.0.0', () => {
   console.log(`App listening at http://localhost:${env.PORT}`)
 });
