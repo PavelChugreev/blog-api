@@ -1,4 +1,4 @@
-# REST API for [News blog projectrender](https://github.com/PavelChugreev/News-blog)
+# REST API for [News blog project](https://github.com/PavelChugreev/News-blog)
 
 ## Used Tools
 
@@ -6,7 +6,6 @@
 - Express  
 - MongoDB  
 - Mongoose
-https://render.com/
 ___
 ### Hosted on [render.com](https://render.com/)  
   
