@@ -3,14 +3,12 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 var bodyParser = require('body-parser')
 const postRoutes = require('./routes/posts');
-const pass = 'keJdW2ZwpeIaqMqD';
-const PORT = process.env.port || 4000;
+const env = require('./env');
 const app = express();
 
 async function start() {
   try {
-    const url = "mongodb+srv://pchugreev:keJdW2ZwpeIaqMqD@cluster0.pqnzimt.mongodb.net/news";
-    await mongoose.connect(url, { useNewUrlParser: true });
+    await mongoose.connect(env.MONGO_URL, { useNewUrlParser: true });
   } catch (e) {
     console.log(e);
   }
@@ -33,4 +31,4 @@ app.use((req, res, next) => {
 
 app.use('/api/posts', postRoutes);
 
-app.listen(PORT);
+app.listen(env.PORT);

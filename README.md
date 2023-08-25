@@ -1,5 +1,6 @@
-### REST API fro News blog project
+### REST API for News blog project
 
 Node js  
 Express  
-MongoDB
+MongoDB  
+Mongoose
