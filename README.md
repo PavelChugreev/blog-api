@@ -2,4 +2,5 @@
 
 Node js  
 Express  
-MongoDB
+MongoDB  
+Mongoose
