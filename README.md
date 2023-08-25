@@ -1,4 +1,4 @@
-# REST API for News blog project
+# REST API for [News blog projectrender](https://github.com/PavelChugreev/News-blog)
 
 ## Used Tools
 
