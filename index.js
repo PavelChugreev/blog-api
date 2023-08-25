@@ -29,6 +29,14 @@ app.use((req, res, next) => {
   next();
 })
 
+app.get('/', (req, res) => {
+  res.json({'message': 'ok'});
+})
+
 app.use('/api/posts', postRoutes);
 
 app.listen(env.PORT);
+
+app.listen(env.PORT, '0.0.0.0', () => {
+  console.log(`App listening at http://localhost:${env.PORT}`)
+});
