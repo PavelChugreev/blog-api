@@ -1,14 +1,21 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 var bodyParser = require('body-parser')
 const postRoutes = require('./routes/posts');
-const env = require('./env');
+const svlRoutes = require('./routes/svl');
 const app = express();
+
+
+const port = process.env.PORT;
 
 async function start() {
   try {
-    await mongoose.connect(env.MONGO_URL, { useNewUrlParser: true });
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      // autoIndex: false
+    });
   } catch (e) {
     console.log(e);
   }
@@ -34,7 +41,8 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/posts', postRoutes);
+app.use('/api/tg-bot/svl', svlRoutes);
 
-app.listen(env.PORT, '0.0.0.0', () => {
-  console.log(`App listening at http://localhost:${env.PORT}`)
+app.listen(port, '0.0.0.0', () => {
+  console.log(`App listening at http://localhost:${port}`)
 });
