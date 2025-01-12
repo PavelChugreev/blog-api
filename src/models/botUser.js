@@ -1,10 +1,17 @@
 const { Schema, model } = require('mongoose');
 
-const botUser = new Schema({
-  _id: {
-    type: String,
-    required: true
+const subscriptionsSchema = new Schema({
+  _id: false,
+  training: {
+    type: Boolean
   },
+  game: {
+    type: Boolean
+  }
+});
+
+const userSchema = new Schema({
+  _id: String,
   username: {
     type: String
   },
@@ -24,10 +31,7 @@ const botUser = new Schema({
     type: String,
     required: true
   },
-  subscriptions: {
-    type: Map,
-    of: Boolean
-  },
+  subscriptions: subscriptionsSchema,
   isAdmin: {
     type: Boolean
   },
@@ -36,4 +40,4 @@ const botUser = new Schema({
   },
 });
 
-module.exports = model('BotUser', botUser);
+module.exports = model('User', userSchema);
