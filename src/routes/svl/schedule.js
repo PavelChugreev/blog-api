@@ -1,17 +1,16 @@
 const {Router} = require('express');
-const Schedule = require('../../models/schedule');
+const {Schedule} = require('../../models/schedule');
 
 const router = Router();
 
 router.get('/schedule', async (req, res) => {
   try {
     const schedule = await Schedule.find();
-    console.log(3333, new Date());
 
     res.status(200).json({ schedule });
   } catch (e) {
     console.log(e);
-    res.status(e.status || 400).json({ schedule: null, message: e.message });
+    res.status(e.status || 400).json({ schedule: null });
   }
 });
 
@@ -23,7 +22,7 @@ router.post('/schedule/add', async (req, res) => {
     res.status(200).json(savedScheduleItem);
   } catch (e) {
     console.log(e);
-    res.status(e.status || 400).json({ schedule: null, message: e.message });
+    res.status(e.status || 400).json({ schedule: null });
   }
 });
 

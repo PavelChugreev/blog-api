@@ -40,4 +40,5 @@ const userSchema = new Schema({
   },
 });
 
-module.exports = model('User', userSchema);
+const BotUser = model('User', userSchema);
+module.exports = { userSchema, BotUser };

@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const scheduleSchema = new Schema({
+const trainingSchema = new Schema({
   day: {
     type: String,
     required: true,
@@ -23,4 +23,5 @@ const scheduleSchema = new Schema({
   }
 });
 
-module.exports = model('Schedule', scheduleSchema);
+const Schedule = model('Schedule', trainingSchema);
+module.exports = { trainingSchema, Schedule };

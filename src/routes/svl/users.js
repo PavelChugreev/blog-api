@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const BotUser = require('../../models/botUser');
+const { BotUser } = require('../../models/botUser');
 
 const router = Router();
 
@@ -9,7 +9,7 @@ router.get('/users', async (req, res) => {
     res.status(200).json({ users });
   } catch (e) {
     console.log(e);
-    res.status(e.status || 400).json({ users: [] });
+    res.status(e.status || 400).json({ users: null });
   }
 });
 
