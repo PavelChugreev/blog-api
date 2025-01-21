@@ -23,5 +23,48 @@ const trainingSchema = new Schema({
   }
 });
 
+const gameSchema = new Schema({
+  _id: String,
+  status: {
+    type: String,
+    required: true,
+    enum : ['open','in_progress', 'closed']
+  },
+  timestamp: {
+    type: String,
+    required: true,
+  },
+  arena: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  homeTeam: {
+    type: String,
+    required: true,
+  },
+  awayTeam: {
+    type: String,
+    required: true,
+  },
+  homeTeamScore: {
+    type: Number,
+  },
+  awayTeamScore: {
+    type: Number,
+  },
+  url: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+  },
+});
+
+// TODO rename Schedule -> Training
 const Schedule = model('Schedule', trainingSchema);
-module.exports = { trainingSchema, Schedule };
+module.exports = { trainingSchema, gameSchema, Schedule };

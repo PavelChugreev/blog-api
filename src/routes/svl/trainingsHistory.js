@@ -1,6 +1,6 @@
 const {Router} = require('express');
 const { BotUser } = require('../../models/botUser');
-const TrainingsHistory = require('../../models/trainingsHistory');
+const { TrainingsHistory } = require('../../models/history');
 
 const router = Router();
 
@@ -41,7 +41,7 @@ router.post('/trainings-history/add', async (req, res) => {
     res.status(200).json(savedTraining);
   } catch (e) {
     console.log(e);
-    res.status(e.status || 400).json({ trainings: null });
+    res.status(e.status || 400).json(null);
   }
 });
 
@@ -112,14 +112,14 @@ router.delete('/trainings-history/:id/delete-player/:playerId', async (req, res)
       throw new Error('Пользователь не записан на тренировку');
     }
 
-    const updatedTrainings = training.players.reduce((acc, curr, i) => {
+    const updatedPlayers = training.players.reduce((acc, curr, i) => {
       if (i !== existingPlayerIndex) {
         acc.push(curr);
       }
       return acc;
     }, []);
 
-    training.players = updatedTrainings;
+    training.players = updatedPlayers;
     await training.save();
 
     res.status(200).json({ success: true });
