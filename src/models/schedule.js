@@ -13,7 +13,7 @@ const trainingSchema = new Schema({
     type: String,
     required: true,
   },
-  place: {
+  arena: {
     type: String,
     required: true,
   },
@@ -66,5 +66,5 @@ const gameSchema = new Schema({
 });
 
 // TODO rename Schedule -> Training
-const Schedule = model('Schedule', trainingSchema);
-module.exports = { trainingSchema, gameSchema, Schedule };
+const Training = model('Training', trainingSchema);
+module.exports = { trainingSchema, gameSchema, Training };

@@ -11,7 +11,7 @@ router.get('/trainings-history', async (req, res) => {
     res.status(200).json({ trainings });
   } catch (e) {
     console.log(e);
-    res.status(e.status || 400).json({ trainings: null });
+    res.status(e.status || 400).json({ trainings: null, error: { message: e.message } });
   }
 });
 
@@ -25,7 +25,7 @@ router.get('/trainings-history/:trainingId', async (req, res) => {
       throw new Error('Тренировка не найдена');
     }
     
-    res.status(200).json({ training });
+    res.status(200).json(training);
   } catch (e) {
     console.log(e);
     res.status(e.status || 400).json({ training: null, error: { message: e.message } });
@@ -41,7 +41,7 @@ router.post('/trainings-history/add', async (req, res) => {
     res.status(200).json(savedTraining);
   } catch (e) {
     console.log(e);
-    res.status(e.status || 400).json(null);
+    res.status(e.status || 400).json({ training: null, error: { message: e.message } });
   }
 });
 
@@ -52,7 +52,7 @@ router.delete('/trainings-history/:id', async (req, res) => {
     res.status(200).json({ success: true });
   } catch (e) {
     console.log(e);
-    res.status(e.status || 400).json({ success: false });
+    res.status(e.status || 400).json({ success: false, error: { message: e.message } });
   }
 });
 

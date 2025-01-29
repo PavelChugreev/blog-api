@@ -25,7 +25,7 @@ router.get('/games-history/:gameId', async (req, res) => {
       throw new Error('Игра не найдена');
     }
     
-    res.status(200).json({ game });
+    res.status(200).json(game);
   } catch (e) {
     console.log(e);
     res.status(e.status || 400).json({ game: null, error: { message: e.message } });
@@ -38,7 +38,7 @@ router.patch('/games-history/:gameId', async (req, res) => {
     const game = await GamesHistory.findByIdAndUpdate(req.params.gameId, req.body, {
       returnDocument: 'after'
     });
-    res.status(200).json({ game });
+    res.status(200).json(game);
   } catch (e) {
     console.log(e);
     res.status(e.status || 400).json({ game: null, error: { message: e.message } });
@@ -65,18 +65,22 @@ router.delete('/games-history/:id', async (req, res) => {
     res.status(200).json({ success: true });
   } catch (e) {
     console.log(e);
-    res.status(e.status || 400).json({ success: false });
+    res.status(e.status || 400).json({ success: false, error: { message: e.message } });
   }
 });
 
 // add player to game
-router.get('/games-history/:trainingId/add-player/:playerId', async (req, res) => {
+router.get('/games-history/:gameId/add-player/:playerId', async (req, res) => {
   try {
     const { gameId, playerId } = req.params;
 
     const game = await GamesHistory.findById(gameId);
     if (!game) {
       throw new Error('Игра не найдена');
+    }
+
+    if (!game.players) {
+      game.players = [];
     }
 
     const existingPlayer = game.players.find(player => player._id === playerId);
@@ -105,9 +109,9 @@ router.get('/games-history/:trainingId/add-player/:playerId', async (req, res) =
 });
 
 // delete players from game
-router.delete('/games-history/:id/delete-player/:playerId', async (req, res) => {
+router.delete('/games-history/:gameId/delete-player/:playerId', async (req, res) => {
   try {
-    const { id: gameId, playerId } = req.params;
+    const { gameId, playerId } = req.params;
     const game = await GamesHistory.findById(gameId);
     if (!game) {
       throw new Error('Игра не найдена');

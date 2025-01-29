@@ -16,10 +16,10 @@ router.get('/users', async (req, res) => {
 router.get('/users/:id', async (req, res) => {
   try {
     const user = await BotUser.findById(req.params.id);
-    res.status(200).json({ user });
+    res.status(200).json(user);
   } catch (e) {
     console.log(e);
-    res.status(e.status || 400).json({ user: null });
+    res.status(e.status || 400).json({ user: null, error: { message: e.message } });
   }
 });
 
@@ -28,10 +28,10 @@ router.post('/users/add', async (req, res) => {
     const newUser = new BotUser(req.body);
     const user = await newUser.save();
 
-    res.status(200).json({ user });
+    res.status(200).json(user);
   } catch (e) {
     console.log(e);
-    res.status(e.status || 400).json({ user: null });
+    res.status(e.status || 400).json({ user: null, error: { message: e.message } });
   }
 });
 
@@ -40,10 +40,10 @@ router.patch(`/users/:id`, async (req, res) => {
     const user = await BotUser.findByIdAndUpdate(req.params.id, req.body, {
       returnDocument: 'after'
     });
-    res.status(200).json({ user });
+    res.status(200).json(user);
   } catch (e) {
     console.log(e);
-    res.status(e.status || 400).json({ user: null });
+    res.status(e.status || 400).json({ user: null, error: { message: e.message } });
   }
 });
 
